@@ -1,1 +1,1 @@
-export const SCHOOL = "Carleton";
+export const SCHOOL = "Carleton University";
