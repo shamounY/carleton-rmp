@@ -1,1 +1,1 @@
-export const SCHOOL = "Carleton University";
+export const SCHOOL_ID = "U2Nob29sLTE0MjA=";

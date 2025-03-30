@@ -6,13 +6,15 @@
       "storage"
     ],
     "background": {
-       "service_worker": "background.js"
+       "service_worker": "src/background/background.ts",
+       "type": "module"
     },
     "content_scripts": [
       {
         "matches": ["https://central.carleton.ca/prod/bwysched.p_course_search"],
-        "js": ["/src/content/content.ts"]
+        "js": ["src/content/content.ts"]
       }
     ],
-    "action": { "default_popup": "index.html" }
+    "action": { "default_popup": "index.html" },
+    "host_permissions": ["https://www.ratemyprofessors.com/*"]
   }
