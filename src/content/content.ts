@@ -13,12 +13,25 @@ professorCells.forEach(async prof => {
     }
     console.log(profName)
 
+    const originalContent = prof.innerHTML;
+
     const profRating = await getProfessorRating(profName)
     if (profRating) {
-        console.log(`Rating for ${profName}: ${profRating.avgDifficulty}`);
+        console.log(`Rating for ${profName}: ${profRating.avgRating}`);
+
+        prof.innerHTML = `
+            ${originalContent}
+            <br/>
+            <span style="font-size: smaller; color: green;">Rating: ${profRating.avgRating}</span>
+        `;
     }
     else {
-        console.log(`Sorry no rating for ${profName}`)
-    }
+        console.log("NA")
 
+        prof.innerHTML = `
+            ${originalContent}
+            <br/>
+            <span style="font-size: smaller; color: green;">Rating: N/A</span>
+        `;
+    }
 })

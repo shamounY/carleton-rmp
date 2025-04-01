@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             }
             else {
                 console.log("im in the else for ", profName);
-                sendResponse({ rating : result[profName] });
+                sendResponse(result[profName]);
             }
         });
         return true;

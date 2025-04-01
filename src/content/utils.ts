@@ -3,6 +3,5 @@ export const getProfessorRating = async (profName : string) => {
         action : "fetchRating",
         prof : profName,
     });
-    
     return rating;
 };
