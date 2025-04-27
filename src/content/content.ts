@@ -19,11 +19,37 @@ professorCells.forEach(async prof => {
     if (profRating) {
         console.log(`Rating for ${profName}: ${profRating.avgRating}`);
 
+        // Determine color based on rating value
+        let ratingColor = "black";
+        const rating = profRating.avgRating;
+        
+        if (rating >= 1.0 && rating <= 2.5) {
+            ratingColor = "red";
+        } else if (rating > 2.5 && rating <= 3.5) {
+            ratingColor = "orange"; 
+        } else if (rating > 3.5 && rating <= 5.0) {
+            ratingColor = "green";
+        }
+
         prof.innerHTML = `
             ${originalContent}
             <br/>
-            <span style="font-size: smaller; color: green;">Rating: ${profRating.avgRating}</span>
+            <span style="
+                display: inline-block;
+                background-color: ${ratingColor};
+                color: white;
+                border-radius: 50%;
+                width: 22px;
+                height: 22px;
+                line-height: 22px;
+                text-align: center;
+                font-size: 11px;
+                font-weight: bold;
+            ">
+                ${profRating.avgRating}
+            </span>
         `;
+
     }
     else {
         console.log("NA")
@@ -31,7 +57,7 @@ professorCells.forEach(async prof => {
         prof.innerHTML = `
             ${originalContent}
             <br/>
-            <span style="font-size: smaller; color: green;">Rating: N/A</span>
+            <span style="font-size: smaller; color: black;">Rating: N/A</span>
         `;
     }
 })
