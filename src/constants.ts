@@ -1,1 +1,0 @@
-export const SCHOOL_ID = "U2Nob29sLTE0MjA=";

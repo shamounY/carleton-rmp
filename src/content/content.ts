@@ -1,4 +1,4 @@
-import { getProfessorRating } from "./utils";
+import { getProfessorRating, determineRatingColour, generateStarRating } from "./utils";
 
 const professorCells = document.querySelectorAll('td[width="9%"]:last-child');
 
@@ -11,80 +11,141 @@ professorCells.forEach(async prof => {
     
     const originalContent = prof.innerHTML;
 
-    const profRating = await getProfessorRating(profName)
-    if (profRating) {
-        console.log(`Rating for ${profName}: ${profRating.avgRating}`);
-
-        //determine color based on rating value
-        let ratingColor = "black";
-        const rating = profRating.avgRating;
+    const profInfo = await getProfessorRating(profName)
+    
+    if (profInfo) {
+        const rating = profInfo.avgRating;
         
-        if (rating >= 1.0 && rating <= 2.5) {
-            ratingColor = "red";
-        } else if (rating > 2.5 && rating <= 3.5) {
-            ratingColor = "orange"; 
-        } else if (rating > 3.5 && rating <= 5.0) {
-            ratingColor = "green";
-        }
-
+        const ratingColour = determineRatingColour(rating);
+        const stars = generateStarRating(rating);
+        
         prof.innerHTML = `
             ${originalContent}
             <br/>
             <div class="tooltip-container" style="display: inline-block; position: relative;">
                 <span style="
-                    background-color: ${ratingColor};
-                    
+                    background-color: ${ratingColour};
                     color: white;
-                    border-radius: 50%;
-                    width: 22px;
+                    border-radius: 6px;
+                    padding: 4px 8px;
+                    min-width: 15px;
                     height: 22px;
-                    line-height: 22px;
-                    text-align: center;
-                    font-size: 11px;
-                    font-weight: bold;
-                    display: inline-block;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                    font-weight: 600;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
                     cursor: default;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
                 ">
-                    ${profRating.avgRating}
+                    ${profInfo.avgRating}
                 </span>
                    <div class="tooltip" style="
                         visibility: hidden;
-                        background-color: #333;
-                        color: #fff;
+                        background-color: #fff;
+                        color: #333;
                         text-align: center;
-                        border-radius: 5px;
-                        padding: 6px;
+                        border-radius: 8px;
+                        padding: 12px;
                         position: absolute;
                         z-index: 1;
                         top: 50%;
                         right: 125%;
                         transform: translateY(-50%);
                         opacity: 0;
-                        transition: opacity 0.3s;
+                        transition: opacity 0.2s ease-in-out;
                         white-space: nowrap;
                         font-size: 12px;
-                        min-width: 180px;
+                        min-width: 200px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
                     ">
-                        <div style="font-weight: bold; font-size: 15px; margin-bottom: 5px;">${profName}</div>
+                        <div style="font-weight: bold; font-size: 18px; margin-bottom: 10px;">${profName}</div>
+                        
+                        <div style="font-size: 16px; margin-bottom: 8px;">${stars}</div>
+                        
+                        <div style="margin: 12px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-weight: 500;">Rating</span>
+                                <span>${profInfo.avgRating}/5.0</span>
+                            </div>
+                            <div style="
+                                width: 100%;
+                                height: 8px;
+                                background-color: #eee;
+                                border-radius: 4px;
+                                overflow: hidden;
+                            ">
+                                <div style="
+                                    width: ${(profInfo.avgRating / 5) * 100}%;
+                                    height: 100%;
+                                    background-color: #4CAF50;
+                                    border-radius: 4px;
+                                "></div>
+                            </div>
+                        </div>
 
-                        <div><strong>Difficulty:</strong> ${profRating.avgDifficulty ?? "N/A"}</div>
-                        <div><strong>Ratings:</strong> ${profRating.numRatings ?? "N/A"}</div>
-                        <div><strong>Would Take Again:</strong> ${Math.round(profRating.wouldTakeAgainPercent) ?? "N/A"}%</div>
+                        <div style="margin: 12px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-weight: 500;">Difficulty</span>
+                                <span>${profInfo.avgDifficulty ?? "N/A"}</span>
+                            </div>
+                            <div style="
+                                width: 100%;
+                                height: 8px;
+                                background-color: #eee;
+                                border-radius: 4px;
+                                overflow: hidden;
+                            ">
+                                <div style="
+                                    width: ${profInfo.avgDifficulty ? (profInfo.avgDifficulty / 5) * 100 : 0}%;
+                                    height: 100%;
+                                    background-color: #FF9800;
+                                    border-radius: 4px;
+                                "></div>
+                            </div>
+                        </div>
+
+                        <div style="margin: 12px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-weight: 500;">Would Take Again</span>
+                                <span>${Math.round(profInfo.wouldTakeAgainPercent) ?? "N/A"}%</span>
+                            </div>
+                            <div style="
+                                width: 100%;
+                                height: 8px;
+                                background-color: #eee;
+                                border-radius: 4px;
+                                overflow: hidden;
+                            ">
+                                <div style="
+                                    width: ${profInfo.wouldTakeAgainPercent ?? 0}%;
+                                    height: 100%;
+                                    background-color: #2196F3;
+                                    border-radius: 4px;
+                                "></div>
+                            </div>
+                        </div>
+
+                        <div style="border-top: 1px solid #eee; margin: 8px 0;"></div>
+
+                        <div style="font-size: 10px">Based on </strong> ${profInfo.numRatings ?? "N/A"} rating(s)</div>
                         <div style="font-size: 10px; text-align: center; margin-top: 5px;">
-                            <a href="https://www.ratemyprofessors.com/professor/${profRating.legacyId}" target="_blank" style="color: #1a0dab;">
+                            <a href="https://www.ratemyprofessors.com/professor/${profInfo.legacyId}" target="_blank" style="color: #0066cc; text-decoration: none; font-weight: 500;">
                                 View on RateMyProfessors
                             </a>
                         </div>
                         <div style="
                             position: absolute;
                             top: 50%;
-                            right: -5px;
-                            margin-top: -5px;
+                            right: -8px;
+                            margin-top: -8px;
                             width: 0;
                             height: 0;
-                            border-top: 5px solid transparent;
-                            border-bottom: 5px solid transparent;
-                            border-left: 5px solid #333;
+                            border-top: 8px solid transparent;
+                            border-bottom: 8px solid transparent;
+                            border-left: 8px solid #fff;
                         "></div>
                     </div>
                 </div>
@@ -106,19 +167,16 @@ professorCells.forEach(async prof => {
                 hideTimeout = setTimeout(() => {
                     tooltipText.style.visibility = "hidden";
                     tooltipText.style.opacity = "0";
-                }, 400); // small delay to avoid flicker
+                }, 300);
             };
         
             tooltip.addEventListener("mouseenter", showTooltip);
             tooltip.addEventListener("mouseleave", hideTooltip);
-            // tooltipText.addEventListener("mouseenter", showTooltip);
-            // tooltipText.addEventListener("mouseleave", hideTooltip);
         }        
     }
 
     else {
         console.log("NA")
-
         prof.innerHTML = `
             ${originalContent}
             <br/>
