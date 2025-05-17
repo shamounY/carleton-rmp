@@ -1,0 +1,179 @@
+.tooltip-container {
+    display: inline-block;
+    position: relative;
+}
+
+.rating-badge {
+    color: white;
+    border-radius: 6px;
+    padding: 4px 8px;
+    min-width: 15px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: default;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.tooltip {
+    visibility: hidden;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 125%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    white-space: nowrap;
+    font-size: 12px;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.tooltip-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.tooltip-stars {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.tooltip-metric {
+    margin: 12px 0;
+}
+
+.tooltip-metric-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.tooltip-metric-label {
+    font-weight: 500;
+}
+
+.tooltip-progress-bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.tooltip-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.tooltip-divider {
+    margin: 8px 0;
+}
+
+.tooltip-footer {
+    font-size: 10px;
+}
+
+.tooltip-link {
+    font-size: 10px;
+    text-align: center;
+    margin-top: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.tooltip-arrow {
+    position: absolute;
+    top: 50%;
+    right: -8px;
+    margin-top: -8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid;
+}
+
+/* Dark mode styles */
+.dark-mode .tooltip {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.dark-mode .tooltip-progress-bar {
+    background-color: #333;
+}
+
+.dark-mode .tooltip-divider {
+    border-top: 1px solid #333;
+}
+
+.dark-mode .tooltip-link a {
+    color: #66b3ff !important;
+}
+
+.dark-mode .tooltip-arrow {
+    border-left-color: #1a1a1a;
+}
+
+/* Light mode styles */
+.light-mode .tooltip {
+    background-color: #fff;
+    color: #333;
+}
+
+.light-mode .tooltip-progress-bar {
+    background-color: #eee;
+}
+
+.light-mode .tooltip-divider {
+    border-top: 1px solid #eee;
+}
+
+.light-mode .tooltip-link a{
+    color: #0066cc !important;
+}
+
+.light-mode .tooltip-arrow {
+    border-left-color: #fff;
+}
+
+/* Star rating styles */
+.star {
+    font-size: 22px;
+}
+
+.star-full {
+    color: gold;
+}
+
+.star-empty {
+    color: #ccc;
+}
+
+.star-partial {
+    position: relative;
+    display: inline-block;
+    font-size: 22px;
+}
+
+.star-partial-empty {
+    color: #ccc;
+}
+
+.star-partial-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: gold;
+}

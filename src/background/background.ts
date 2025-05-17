@@ -50,9 +50,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                         return;
                     }
 
-                    // TODO: CHECK ALL TEACHERS AND CHOOSE ONE THAT HAS SAME FIRST AND LAST NAME
-                    // IGNORE TODO???
-
                     if (!isMatchingProfessor(profName, teachers[0])) {
                         sendResponse(null);
                         return;

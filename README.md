@@ -1,6 +1,6 @@
 # Carleton RMP Chrome Extension
 
-A Chrome extension that integrates Rate My Professors data directly into Carleton University's course registration system. This extension provides quick access to professor ratings and reviews while browsing courses.
+A Chrome extension that integrates Rate My Professors data directly into Carleton Centrals course registration page. This extension provides quick access to professor ratings and reviews while browsing courses.
 
 ## Features
 
@@ -40,10 +40,6 @@ carleton-rmp/
 ├── manifest.json       # Extension configuration
 └── README.md
 ```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
