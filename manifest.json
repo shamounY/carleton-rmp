@@ -3,7 +3,8 @@
     "name": "Carleton-rmp",
     "version": "1.0.0",
     "permissions": [
-      "storage"
+      "storage", 
+      "tabs"
     ],
     "background": {
        "service_worker": "src/background/background.ts",

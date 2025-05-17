@@ -1,10 +1,21 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.App.light {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.App.dark {
+  background-color: #1a1a1a;
+  color: #ffffff;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  display: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,18 +25,64 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.App-header h1 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.theme-toggle {
+  margin: 20px 0;
+}
+
+.theme-button {
+  background-color: transparent;
+  border: 2px solid;
+  border-color: inherit;
+  color: inherit;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+  opacity: 0.8;
+}
+
+.info-section {
+  max-width: 280px;
+  margin: 20px 0;
+}
+
+.info-section p {
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .App-link {
-  color: #61dafb;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid;
+  padding-bottom: 2px;
+  transition: opacity 0.3s ease;
+}
+
+.App-link:hover {
+  opacity: 0.8;
+}
+
+button {
+  font-size: calc(10px + 2vmin);
 }
 
 @keyframes App-logo-spin {
@@ -35,8 +92,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-button {
-  font-size: calc(10px + 2vmin);
 }
