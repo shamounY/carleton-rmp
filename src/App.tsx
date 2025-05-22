@@ -56,7 +56,7 @@ function App() {
 
         <div className="info-section">
           <p>
-            This extension shows RateMyProfessors ratings directly on Carleton's Central.
+            This extension shows RateMyProfessors ratings directly on Carleton Central.
           </p>
           <p>
             <a

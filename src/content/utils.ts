@@ -12,15 +12,28 @@ export const getProfessorRating = async (profName : string) => {
 };
 
 /**
+ * Removes the profs middle name if they have one.
+ * @param name - The profs fullname.
+ * @returns - The first and last name of the prof.
+ */
+export const remmoveMiddleName = (name : string) => {
+    const nameParts = name.split(" ");
+    const profName = nameParts.length > 2 ? 
+        `${nameParts[0]} ${nameParts[nameParts.length - 1]}` :
+        name;
+    return profName
+}
+
+/**
  * Determines the color to display for a given rating value.
  * @param rating - The numerical rating value (1.0 to 5.0)
  * @returns A string representing the color to use ('red', 'orange', 'green', or 'black')
  */
 export const determineRatingColour = (rating : number) => {
     let ratingColour = "black";
-    if (rating >= 0 && rating <= 2.5) {
+    if (rating >= 0 && rating <= 2.4) {
         ratingColour = "red";
-    } else if (rating > 2.5 && rating <= 3.4) {
+    } else if (rating >= 2.5 && rating <= 3.4) {
         ratingColour = "darkorange"; 
     } else if (rating >= 3.5 && rating <= 3.9) {
         ratingColour = "orange"
@@ -111,15 +124,7 @@ export const createProfessorRatingHTML = async (
                 
                 <div class="tooltip-stars">${stars}</div>
                 
-                <div class="tooltip-metric">
-                    <div class="tooltip-metric-header">
-                        <span class="tooltip-metric-label">Rating</span>
-                        <span>${profInfo.avgRating}/5.0</span>
-                    </div>
-                    <div class="tooltip-progress-bar">
-                        <div class="tooltip-progress-fill" style="width: ${(profInfo.avgRating / 5) * 100}%; background-color: #4CAF50;"></div>
-                    </div>
-                </div>
+        
 
                 <div class="tooltip-metric">
                     <div class="tooltip-metric-header">
@@ -127,7 +132,7 @@ export const createProfessorRatingHTML = async (
                         <span>${profInfo.avgDifficulty ?? "N/A"}</span>
                     </div>
                     <div class="tooltip-progress-bar">
-                        <div class="tooltip-progress-fill" style="width: ${profInfo.avgDifficulty ? (profInfo.avgDifficulty / 5) * 100 : 0}%; background-color: #FF9800;"></div>
+                        <div class="tooltip-progress-fill" style="width: ${profInfo.avgDifficulty ? (profInfo.avgDifficulty / 5) * 100 : 0}%; background-color:rgb(255, 0, 144);"></div>
                     </div>
                 </div>
 

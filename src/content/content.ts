@@ -1,13 +1,15 @@
-import { getProfessorRating, createProfessorRatingHTML } from "./utils";
+import { getProfessorRating, createProfessorRatingHTML, remmoveMiddleName } from "./utils";
 
 const professorCells = document.querySelectorAll('td[width="9%"]:last-child');
 
 // Loop through professors, get rating, and display
 professorCells.forEach(async prof => {
-    const profName = prof.textContent?.trim();
-    if (!profName || profName === "Instructor") {
+    const fullProfName = prof.textContent?.trim();
+    if (!fullProfName || fullProfName === "Instructor") {
         return
     }
+
+    const profName = remmoveMiddleName(fullProfName);
     
     const originalContent = prof.innerHTML;
 
@@ -33,7 +35,7 @@ professorCells.forEach(async prof => {
                 hideTimeout = setTimeout(() => {
                     tooltipText.style.visibility = "hidden";
                     tooltipText.style.opacity = "0";
-                }, 300);
+                }, 150);
             };
         
             tooltip.addEventListener("mouseenter", showTooltip);
