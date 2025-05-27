@@ -123,9 +123,7 @@ export const createProfessorRatingHTML = async (
                 <div class="tooltip-title">${profName}</div>
                 
                 <div class="tooltip-stars">${stars}</div>
-                
-        
-
+            
                 <div class="tooltip-metric">
                     <div class="tooltip-metric-header">
                         <span class="tooltip-metric-label">Difficulty</span>

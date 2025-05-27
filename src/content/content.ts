@@ -27,6 +27,18 @@ professorCells.forEach(async prof => {
         
             const showTooltip = () => {
                 clearTimeout(hideTimeout);
+                
+                // Calculate and set position
+                const tooltipRect = tooltip.getBoundingClientRect();
+                const tooltipTextRect = tooltipText.getBoundingClientRect();
+                
+                // Position to the left of the rating badge with some spacing
+                const left = tooltipRect.left - tooltipTextRect.width - 10;
+                const top = tooltipRect.top + (tooltipRect.height / 2) - (tooltipTextRect.height / 2);
+                
+                tooltipText.style.left = `${Math.max(10, left)}px`;
+                tooltipText.style.top = `${top}px`;
+                
                 tooltipText.style.visibility = "visible";
                 tooltipText.style.opacity = "1";
             };
@@ -35,7 +47,7 @@ professorCells.forEach(async prof => {
                 hideTimeout = setTimeout(() => {
                     tooltipText.style.visibility = "hidden";
                     tooltipText.style.opacity = "0";
-                }, 150);
+                }, 100);
             };
         
             tooltip.addEventListener("mouseenter", showTooltip);
