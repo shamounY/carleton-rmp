@@ -137,10 +137,10 @@ export const createProfessorRatingHTML = async (
                 <div class="tooltip-metric">
                     <div class="tooltip-metric-header">
                         <span class="tooltip-metric-label">Would Take Again</span>
-                        <span>${Math.round(profInfo.wouldTakeAgainPercent) ?? "N/A"}%</span>
+                        <span>${profInfo.wouldTakeAgainPercent > 0 ? `${Math.round(profInfo.wouldTakeAgainPercent)} %`: "N/A"}</span>
                     </div>
                     <div class="tooltip-progress-bar">
-                        <div class="tooltip-progress-fill" style="width: ${profInfo.wouldTakeAgainPercent ?? 0}%; background-color: #2196F3;"></div>
+                        <div class="tooltip-progress-fill" style="width: ${profInfo.wouldTakeAgainPercent > 0 ? profInfo.wouldTakeAgainPercent : 0}%; background-color: #2196F3;"></div>
                     </div>
                 </div>
 
