@@ -7,9 +7,9 @@ import ratings from '@mtucourses/rate-my-professors';
 const SCHOOL_ID = "U2Nob29sLTE0MjA=";
 
 /**
- * Cache expiration time in milliseconds (1 month)
+ * Cache expiration time in milliseconds (7 Days)
  */
-const CACHE_EXPIRATION = 30 * 24 * 60 * 60 * 1000;
+const CACHE_EXPIRATION = 7 * 24 * 60 * 60 * 1000;
 
 /**
  * Dictionary of common name variations (formal name -> nickname/shortened name)
@@ -28,7 +28,6 @@ const NAME_VARIATIONS: Record<string, string[]> = {
     "benjamin": ["ben"],
     "samuel": ["sam"],
     "alexander": ["alex"],
-    "james": ["jim"],
     "katherine": ["kate", "kathy"],
     "elizabeth": ["liz", "beth"],
     "jennifer": ["jen"],
@@ -82,7 +81,6 @@ const getNameVariations = (profName: string): string[] => {
             variations.push(`${formalName} ${lastName}`);
         }
     }
-
     return variations;
 }
 
@@ -134,7 +132,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     if (profResult) break;
                 }
             }
-            
             sendResponse(profResult);
         });
         return true;
