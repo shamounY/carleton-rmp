@@ -59,22 +59,7 @@ professorCells.forEach(async prof => {
         prof.innerHTML = `
             ${originalContent}
             <br/>
-            <span style="
-                background-color: #e0e0e0;
-                color: #666;
-                border-radius: 6px;
-                padding: 4px 8px;
-                min-width: 15px;
-                height: 22px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                font-weight: 600;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                cursor: default;
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            ">N/A</span>
+            <span class="na">N/A</span>
         `;
     }
 })
