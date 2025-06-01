@@ -1,7 +1,7 @@
 import ratings from '@mtucourses/rate-my-professors';
 
 /**
- * Base64 encoded school ID for Carleton University.
+ * School ID for Carleton University.
  * @type {string}
  */
 const SCHOOL_ID = "U2Nob29sLTE0MjA=";
@@ -31,7 +31,10 @@ const NAME_VARIATIONS: Record<string, string[]> = {
     "katherine": ["kate", "kathy"],
     "elizabeth": ["liz", "beth"],
     "jennifer": ["jen"],
-    "margaret": ["meg", "maggie"]
+    "margaret": ["meg", "maggie"],
+    "shelley": ["shelly"],
+    "kimberley": ["kim"],
+    "patrick": ["pat"]
 };
 
 /**
@@ -40,9 +43,61 @@ const NAME_VARIATIONS: Record<string, string[]> = {
  * @param {Object} teacher - The teacher object from the search results
  * @returns {boolean} - True if names match, false otherwise
  */
+
 const isMatchingProfessor = (profName: string, teacher: {firstName: string, lastName: string}): boolean => {
-    const teacherFullName = `${teacher.firstName} ${teacher.lastName}`.toLowerCase();
-    return teacherFullName === profName.toLowerCase();
+    // Normalize both names by removing extra spaces and special characters
+    const normalizeString = (str: string): string => {
+        return str.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
+    };
+
+    // Get first, last, and potentially middle names from both sources
+    const profNameNormalized = normalizeString(profName);
+    console.log("profname: ", profNameNormalized);
+    
+    const teacherFullName = normalizeString(teacher.firstName + " " + teacher.lastName);
+
+    console.log("teacher from rmp name: ", teacherFullName);
+
+
+    // TODO: MAYBE ADD A STRING SIMILARITY TO COMPARE NAMES AND ACCEPT GREATHER THAN 0.85?
+    
+    // If names match exactly after normalization, return true
+    if (teacherFullName === profNameNormalized) return true;
+    
+    // Split names into parts
+    const profParts = profNameNormalized.split(' ');
+    const teacherParts = teacherFullName.split(' ');
+    
+    // If first and last names match, consider it a match regardless of middle names
+    if (profParts.length > 0 && teacherParts.length > 0 && 
+        profParts[0] === teacherParts[0] && 
+        profParts[profParts.length-1] === teacherParts[teacherParts.length-1]) {
+        return true;
+    }
+    
+    // Handle concatenated names (like JoHun vs Jo Hun)
+    // if (profParts.length > teacherParts.length) {
+    //     // Try to see if concatenating parts of profName matches teacherName
+    //     for (let i = 0; i < profParts.length - 1; i++) {
+    //         const concatenated = [...profParts];
+    //         concatenated[i] = concatenated[i] + concatenated[i+1];
+    //         concatenated.splice(i+1, 1);
+            
+    //         if (concatenated.join(' ') === teacherFullName) return true;
+    //     }
+    // } else if (teacherParts.length > profParts.length) {
+    //     // Try to see if concatenating parts of teacherName matches profName
+    //     for (let i = 0; i < teacherParts.length - 1; i++) {
+    //         const concatenated = [...teacherParts];
+    //         concatenated[i] = concatenated[i] + concatenated[i+1];
+    //         concatenated.splice(i+1, 1);
+            
+    //         if (concatenated.join(' ') === profNameNormalized) return true;
+    //     }
+    // }
+    
+    // If we get here, names don't match
+    return false;
 }
 
 /**
@@ -91,7 +146,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.storage.local.get(profName).then(async (result) => {
             const cachedData = result[profName];
             
-            if (cachedData && isCacheValid(cachedData)) {
+            if (cachedData && isCacheValid(cachedData)) {                
                 sendResponse(cachedData.data);
                 return;
             }
@@ -99,17 +154,29 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             // Try with original name first
             const searchAndRespond = async (nameToSearch: string) => {
                 try {
+                    console.log("trying: ", nameToSearch)
                     const teachers = await ratings.searchTeacher(nameToSearch, SCHOOL_ID);
                     
                     if (teachers.length === 0) {
                         return null;
                     }
 
-                    if (!isMatchingProfessor(nameToSearch, teachers[0])) {
+                    console.log("teachers: ", teachers)
+                    
+                    // Look through every teacher in the array to find the one that matches
+                    // Needed because of middle names or special characters in names
+                    const matchingTeacher = teachers.find(teacher => 
+                        isMatchingProfessor(nameToSearch, teacher)
+                    );
+                    
+                    // If no matching teacher found, return null
+                    if (!matchingTeacher) {
                         return null;
                     }
+                    
+                    const teacherID = matchingTeacher.id;
 
-                    const profInfo = await ratings.getTeacher(teachers[0].id);
+                    const profInfo = await ratings.getTeacher(teacherID);
                     const dataToCache = {
                         timestamp: Date.now(),
                         data: profInfo
