@@ -4,12 +4,10 @@ const professorCells = document.querySelectorAll('td[width="9%"]:last-child');
 
 // Loop through professors, get rating, and display
 professorCells.forEach(async prof => {
-    const fullProfName = prof.textContent?.trim();
-    if (!fullProfName || fullProfName === "Instructor") {
+    const profName = prof.textContent?.trim();
+    if (!profName || profName === "Instructor") {
         return
     }
-
-    const profName = remmoveMiddleName(fullProfName);
     
     const originalContent = prof.innerHTML;
 
