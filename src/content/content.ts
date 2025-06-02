@@ -1,4 +1,4 @@
-import { getProfessorRating, createProfessorRatingHTML, remmoveMiddleName } from "./utils";
+import { getProfessorRating, createProfessorRatingHTML } from "./utils";
 
 const professorCells = document.querySelectorAll('td[width="9%"]:last-child');
 
