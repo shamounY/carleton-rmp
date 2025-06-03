@@ -46,7 +46,7 @@ function App() {
     <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
       <header className="App-header">
         <h1>Carleton RMP</h1>
-        <p>Rate My Professors Integration</p>
+        <img src="/assets/icons/icon128.png" className="App-logo" alt="Carleton RMP logo" />
         
         <div className="theme-toggle">
           <button onClick={toggleTheme} className="theme-button">
