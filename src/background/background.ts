@@ -34,7 +34,8 @@ const NAME_VARIATIONS: Record<string, string[]> = {
     "margaret": ["meg", "maggie"],
     "shelley": ["shelly"],
     "kimberley": ["kim"],
-    "patrick": ["pat"]
+    "patrick": ["pat"],
+    "masako": ["mako"]
 };
 
 /**
@@ -45,9 +46,15 @@ const NAME_VARIATIONS: Record<string, string[]> = {
  */
 
 const isMatchingProfessor = (profName: string, teacher: {firstName: string, lastName: string}): boolean => {
-    // Normalize both names by removing extra spaces and special characters
+    // Normalize both names by removing extra spaces, accents, and special characters
     const normalizeString = (str: string): string => {
-        return str.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
+        return str.toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/-/g, ' ')  // Replace dashes with spaces to separate hyphenated names
+            .replace(/[^\w\s]/g, '')
+            .replace(/\s+/g, ' ')
+            .trim();
     };
 
     // Get first, last, and potentially middle names from both sources
@@ -69,32 +76,14 @@ const isMatchingProfessor = (profName: string, teacher: {firstName: string, last
     const teacherParts = teacherFullName.split(' ');
     
     // If first and last names match, consider it a match regardless of middle names
-    if (profParts.length > 0 && teacherParts.length > 0 && 
-        profParts[0] === teacherParts[0] && 
-        profParts[profParts.length-1] === teacherParts[teacherParts.length-1]) {
+    if ((profParts.length > 0 && teacherParts.length > 0) && 
+        (profParts[0] === teacherParts[0] && 
+        profParts[profParts.length-1] === teacherParts[teacherParts.length-1]) 
+
+        // Check if order of names are switched
+        || (profParts[0] === teacherParts[teacherParts.length-1]) && profParts[profParts.length-1] === teacherParts[0]) {
         return true;
     }
-    
-    // Handle concatenated names (like JoHun vs Jo Hun)
-    // if (profParts.length > teacherParts.length) {
-    //     // Try to see if concatenating parts of profName matches teacherName
-    //     for (let i = 0; i < profParts.length - 1; i++) {
-    //         const concatenated = [...profParts];
-    //         concatenated[i] = concatenated[i] + concatenated[i+1];
-    //         concatenated.splice(i+1, 1);
-            
-    //         if (concatenated.join(' ') === teacherFullName) return true;
-    //     }
-    // } else if (teacherParts.length > profParts.length) {
-    //     // Try to see if concatenating parts of teacherName matches profName
-    //     for (let i = 0; i < teacherParts.length - 1; i++) {
-    //         const concatenated = [...teacherParts];
-    //         concatenated[i] = concatenated[i] + concatenated[i+1];
-    //         concatenated.splice(i+1, 1);
-            
-    //         if (concatenated.join(' ') === profNameNormalized) return true;
-    //     }
-    // }
     
     // If we get here, names don't match
     return false;
