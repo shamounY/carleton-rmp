@@ -1,4 +1,4 @@
-# Carleton RMP Chrome Extension
+# Carleton RMP
 
 <p align="center">
   <img src="assets/icons/icon128.png" alt="Carleton RMP Logo" width="128" height="128">
