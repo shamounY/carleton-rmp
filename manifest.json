@@ -14,8 +14,7 @@
     "content_scripts": [
       {
         "matches": ["https://central.carleton.ca/prod/bwysched.p_course_search"],
-        "js": ["src/content/content.ts"],
-        "css": ["src/content/styles.css"]
+        "js": ["src/content/content.ts"]
       }
     ],
     "icons": {
