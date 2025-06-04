@@ -35,7 +35,8 @@ const NAME_VARIATIONS: Record<string, string[]> = {
     "shelley": ["shelly"],
     "kimberley": ["kim"],
     "patrick": ["pat"],
-    "masako": ["mako"]
+    "masako": ["mako"],
+    "joshua": ["josh"]
 };
 
 /**
@@ -58,15 +59,10 @@ const isMatchingProfessor = (profName: string, teacher: {firstName: string, last
     };
 
     // Get first, last, and potentially middle names from both sources
-    const profNameNormalized = normalizeString(profName);
-    console.log("profname: ", profNameNormalized);
-    
+    const profNameNormalized = normalizeString(profName);    
     const teacherFullName = normalizeString(teacher.firstName + " " + teacher.lastName);
 
-    console.log("teacher from rmp name: ", teacherFullName);
-
-
-    // TODO: MAYBE ADD A STRING SIMILARITY TO COMPARE NAMES AND ACCEPT GREATHER THAN 0.85?
+    // TODO: ADD A STRING SIMILARITY TO COMPARE NAMES AND ACCEPT GREATHER THAN 0.85?
     
     // If names match exactly after normalization, return true
     if (teacherFullName === profNameNormalized) return true;
