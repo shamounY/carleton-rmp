@@ -9,7 +9,7 @@ A Chrome extension that integrates Rate My Professors data directly into Carleto
 ## Screenshots
 
 <p align="center">
-  <img src="assets/screenshots/main-view.png" alt="Rating badges shown on Carleton Central" width="600">
+  <img src="assets/screenshots/main-view.png" alt="Rating badges shown on Carleton Central" width="1000">
   <br>
   <em>Rating badges displayed next to professor names</em>
 </p>
