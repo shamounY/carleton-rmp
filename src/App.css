@@ -95,3 +95,103 @@ button {
     transform: rotate(360deg);
   }
 }
+
+/* Toggle Switch Styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 35px;
+  margin: 0 10px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ddd;
+  transition: .4s;
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 28px;
+  width: 28px;
+  left: 4px;
+  bottom: 3.5px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+.slider .icon {
+  position: absolute;
+  font-size: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.4s;
+  line-height: 1;
+  z-index: 1;
+}
+
+.slider .sun-icon {
+  left: 10px;
+  color: #f39c12;
+}
+
+.slider .moon-icon {
+  right: 10px;
+  color: #3498db;
+}
+
+input:checked + .slider {
+  background-color: #34495e;
+}
+
+input:checked + .slider:before {
+  transform: translateX(35px);
+}
+
+input:not(:checked) + .slider {
+  background-color: #ddd;
+}
+
+.App.dark input:checked + .slider {
+  background-color: #2c3e50;
+}
+
+.App.dark .slider {
+  background-color: #bdc3c7;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.toggle-label {
+  font-size: 14px;
+  user-select: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.toggle-label:hover {
+  opacity: 0.8;
+}

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import icon128 from '/assets/icons/icon128.png'
+import darkmodeLogo from '/assets/icons/darkmode-logo.png'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -46,12 +48,20 @@ function App() {
     <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
       <header className="App-header">
         <h1>Carleton RMP</h1>
-        <img src="/assets/icons/icon128.png" className="App-logo" alt="Carleton RMP logo" />
+        <img src={isDarkMode ? darkmodeLogo : icon128} className="App-logo" alt="Carleton RMP logo" />
         
-        <div className="theme-toggle">
-          <button onClick={toggleTheme} className="theme-button">
-            {isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
-          </button>
+        <div className="toggle-container">
+          <label className="toggle-switch">
+            <input 
+              type="checkbox" 
+              checked={isDarkMode} 
+              onChange={toggleTheme}
+            />
+            <span className="slider">
+              <span className="icon sun-icon">☀️</span>
+              <span className="icon moon-icon">🌙</span>
+            </span>
+          </label>
         </div>
 
         <div className="info-section">
