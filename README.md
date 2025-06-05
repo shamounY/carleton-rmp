@@ -69,7 +69,7 @@ npm run build
 
 ## Usage
 
-1. **Navigate** to [Carleton Central's course search](https://central.carleton.ca/prod/bwysched.p_course_search)
+1. **Navigate** to the Carleton Central course selection page
 2. **Search** for courses as you normally would
 3. **View ratings** - Professor names will show color-coded rating badges:
    - 🟢 Green (4.0-5.0): Excellent ratings
