@@ -149,5 +149,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - [Rate My Professors](https://www.ratemyprofessors.com/) for providing the rating data
-- [@mtucourses/rate-my-professors](https://github.com/mtucourses/rate-my-professors) for the excellent API wrapper
+- [@mtucourses/rate-my-professors](https://github.com/Michigan-Tech-Courses/rate-my-professors) for the API wrapper
 - Carleton University for their course registration system 
