@@ -41,11 +41,7 @@ A Chrome extension that integrates Rate My Professors data directly into Carleto
 
 ### For Users
 
-1. Download the zip
-2. Extract the ZIP file
-3. Open Chrome and navigate to `chrome://extensions/`
-4. Enable "Developer mode" in the top right corner
-5. Click "Load unpacked" and select the extracted folder
+Download from Chrome Store: https://chromewebstore.google.com/detail/carleton-rmp/pbefhmhjgccbpifkphfhlbheeeifkplh
 
 ### For Developers
 
