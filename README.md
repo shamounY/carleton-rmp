@@ -141,13 +141,3 @@ This extension:
 - ✅ Does NOT transmit data to third parties
 
 Rating data is fetched directly from RateMyProfessors' public API and cached locally for performance.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [Rate My Professors](https://www.ratemyprofessors.com/) for providing the rating data
-- [@mtucourses/rate-my-professors](https://github.com/Michigan-Tech-Courses/rate-my-professors) for the API wrapper
-- Carleton University for their course registration system 
