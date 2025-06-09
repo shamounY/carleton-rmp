@@ -61,7 +61,11 @@ npm install
 npm run build
 ```
 
-4. Load the `dist` folder in Chrome as described above
+4. Open Chrome and navigate to `chrome://extensions/`
+
+5. Enable "Developer mode" in the top right corner
+
+6. Click "Load unpacked" and select the `dist` folder
 
 ## Usage
 
