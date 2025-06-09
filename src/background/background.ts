@@ -139,14 +139,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             // Try with original name first
             const searchAndRespond = async (nameToSearch: string) => {
                 try {
-                    console.log("trying: ", nameToSearch)
                     const teachers = await ratings.searchTeacher(nameToSearch, SCHOOL_ID);
                     
                     if (teachers.length === 0) {
                         return null;
                     }
-
-                    console.log("teachers: ", teachers)
                     
                     // Look through every teacher in the array to find the one that matches
                     // Needed because of middle names or special characters in names
