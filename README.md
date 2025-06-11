@@ -1,4 +1,4 @@
-# Carleton RMP
+<h2 align="center">Carleton RMP</h2>
 
 <p align="center">
   <img src="assets/icons/icon128.png" alt="Carleton RMP Logo" width="128" height="128">
