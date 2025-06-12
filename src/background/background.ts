@@ -26,12 +26,13 @@ const NAME_VARIATIONS: Record<string, string[]> = {
     "elizabeth": ["liz", "beth"],
     "jennifer": ["jen"],
     "margaret": ["meg", "maggie"],
-    "shelley": ["shelly"],
     "kimberley": ["kim"],
     "patrick": ["pat"],
     "masako": ["mako"],
     "joshua": ["josh"],
-    "frederick": ["fred"]
+    "frederick": ["fred"],
+    "donald": ["don"],
+    "pamela": ["pam"]
 };
 
 /**
@@ -94,7 +95,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     if (!teacherID) {
                         return null;
                     }
-            
+
                     const profInfo = await getTeacher(teacherID);
                     const dataToCache = {
                         timestamp: Date.now(),
