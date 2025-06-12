@@ -1,6 +1,6 @@
 import { AUTH_TOKEN, URL } from "./constants"
 import { SCHOOL_IDS } from './constants';
-
+import { jaroWinkler } from "jaro-winkler-typescript";
 /**
  * Checks if the teacher's name matches the searched professor name
  * @param {string} profName - The name of the professor being searched
@@ -43,6 +43,15 @@ const isMatchingProfessor = (profName: string, teacher: {firstName: string, last
         return true;
     }
     
+    // Check similarity between names since there can be spelling variations between rmp and course page
+    const firstAsLastSimilarity = jaroWinkler(profParts[0], teacherParts[0]);
+    const lastAsFirstSimilarity = jaroWinkler(profParts[profParts.length - 1], teacherParts[teacherParts.length - 1]);
+
+    if (firstAsLastSimilarity >= 0.95 && lastAsFirstSimilarity >= 0.95) {
+        console.log("in this one gaga", profName);
+        return true;
+    }
+
     // If we get here, names don't match
     return false;
 }
@@ -72,10 +81,10 @@ export interface ITeacherPage {
 };
 
 // Query to find teachers
-export const getTeacherID = async (name: string) => {        
-    for (let schoolID of SCHOOL_IDS) {
-        console.log("id: ", schoolID);
-        
+export const getTeacherID = async (name: string) => {    
+    
+    // Loop through all school ids
+    for (let schoolID of SCHOOL_IDS) {        
         const response = await fetch(URL, {
             method: "POST",
             headers: {
