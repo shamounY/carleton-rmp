@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Carleton RMP",
     "description": "Display RateMyProf ratings direclty on Carleton Central",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "permissions": [
       "storage", 
       "tabs"
