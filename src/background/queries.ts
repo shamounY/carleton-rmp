@@ -48,7 +48,6 @@ const isMatchingProfessor = (profName: string, teacher: {firstName: string, last
     const lastAsFirstSimilarity = jaroWinkler(profParts[profParts.length - 1], teacherParts[teacherParts.length - 1]);
 
     if (firstAsLastSimilarity >= 0.95 && lastAsFirstSimilarity >= 0.95) {
-        console.log("in this one gaga", profName);
         return true;
     }
 
